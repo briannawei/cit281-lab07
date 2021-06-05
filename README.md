@@ -1,37 +1,59 @@
-## Welcome to GitHub Pages
+## Lab 7
 
-You can use the [editor on GitHub](https://github.com/briannawei/cit281-lab07/edit/main/README.md) to maintain and preview the content for your website in Markdown files.
+<img width="1083" alt="lab-07" src="https://user-images.githubusercontent.com/84175061/120881759-50fe4f80-c588-11eb-8a54-924f6c63565b.png">
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+### lab-07.js
 ```
+/*
+Name: Brianna Wei
+CIT 281
+Lab-07.js
+*/
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+class CustomError extends Error {
+    constructor(args) {
+        super(args);
+        this.message = "Custom Error"
+    }
 
-### Jekyll Themes
+    throwGenericError() {
+        throw new Error("Generic Error");
+    }
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/briannawei/cit281-lab07/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+    throwCustomError() {
+        throw new CustomError().message;
+    }
+}
 
-### Support or Contact
+const myError = new CustomError();
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+console.log("Force Generic Error");
+
+
+try {
+    // try block
+    console.log("Generic Error Try Block");
+    myError.throwGenericError();
+} catch {
+    console.log("Generic Error Catch Block");
+    console.log(myError.throwGenericError());
+} finally {
+    console.log("Generic Error Finally Block")
+}
+
+
+
+console.log("Force Custom Error");
+
+try {
+    console.log("Custom Error Try Block");
+    myError.throwGenericError();
+} catch {
+    console.log("Custom Error Catch Block");
+    console.log(myError.throwCustomError());
+} finally {
+    console.log("Custom Error Finally Block")
+}
+
+```
